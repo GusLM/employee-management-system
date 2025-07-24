@@ -1,12 +1,14 @@
 package model;
 
-public abstract class Employee {
+import java.math.BigDecimal;
+
+public class Employee {
     private String name;
     private String cpf;
     private String email;
-    private Double baseSalary;
+    private BigDecimal baseSalary;
 
-    public Employee(String name, String cpf, String email, double baseSalary) {
+    public Employee(String name, String cpf, String email, BigDecimal baseSalary) {
         this.name = name;
         this.cpf = cpf;
         this.email = email;
@@ -37,22 +39,20 @@ public abstract class Employee {
         this.email = email;
     }
 
-    public double getBaseSalary() {
+    public BigDecimal getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(double baseSalary) {
+    public void setBaseSalary(BigDecimal baseSalary) {
         this.baseSalary = baseSalary;
     }
-
-    public abstract double calculateNetSalary();
 
     @Override
     public String toString() {
         return name
                 + " | CPF: " + cpf
                 + " | Email: " + email
-                + " | Base Salary: R$" + String.format("%.2f", baseSalary);
+                + " | Base Salary: R$" + baseSalary;
     }
 
 }

@@ -1,4 +1,21 @@
 package model;
 
-public class Developer {
+import java.math.BigDecimal;
+
+public class Developer extends Employee{
+    private Double bonus;
+
+    public Developer(String name, String cpf, String email, BigDecimal baseSalary, Double bonus) {
+        super(name, cpf, email, baseSalary);
+        this.bonus = bonus;
+    }
+
+    public Double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Double bonus) {
+        this.bonus = bonus;
+    }
+
 }
