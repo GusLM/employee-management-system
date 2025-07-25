@@ -5,9 +5,8 @@ import java.math.BigDecimal;
 public class Developer extends Employee{
     private Double bonus;
 
-    public Developer(String name, String cpf, String email, BigDecimal baseSalary, Double bonus) {
+    public Developer(String name, String cpf, String email, BigDecimal baseSalary) {
         super(name, cpf, email, baseSalary);
-        this.bonus = bonus;
     }
 
     public Double getBonus() {
