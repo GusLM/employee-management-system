@@ -26,8 +26,6 @@ public class InssCalculator {
     private static final BigDecimal TIER_4_LIMIT = new BigDecimal("8157.41");
     private static final BigDecimal TIER_4_RATE = new BigDecimal("0.14");
 
-
-
     /**
      * Calculates the contribution for a specific salary bracket.
      * This method applies a given rate only to the portion of the salary that falls within the specified range.
@@ -48,7 +46,7 @@ public class InssCalculator {
         BigDecimal taxableBase = baseSalary.min(upperLimit).subtract(lowerLimit);
 
         // Apply the rate to the taxable portion and return the contribution amount
-        return taxableBase.multiply(rate);
+        return taxableBase.multiply(rate).setScale(2, RoundingMode.HALF_UP);
     }
 
     /**
@@ -61,7 +59,7 @@ public class InssCalculator {
      * @param baseSalary The employee's gross salary.
      * @return The total INSS contribution, rounded to 2 decimal places.
      */
-    public static BigDecimal calculateINSS(BigDecimal baseSalary) {
+    protected static BigDecimal calculateINSS(BigDecimal baseSalary) {
         // Initialize the total deduction amount to zero
         BigDecimal total = BigDecimal.ZERO;
 
