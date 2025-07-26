@@ -16,5 +16,4 @@ public class Developer extends Employee{
     public void setBonus(Double bonus) {
         this.bonus = bonus;
     }
-
 }

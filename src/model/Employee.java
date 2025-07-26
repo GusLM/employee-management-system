@@ -3,10 +3,13 @@ package model;
 import java.math.BigDecimal;
 
 public class Employee {
+
     private String name;
     private String cpf;
     private String email;
     private BigDecimal baseSalary;
+    private EmployeeRole employeeRole;
+    private PerformanceLevel performanceRate;
 
     public Employee(String name, String cpf, String email, BigDecimal baseSalary) {
         this.name = name;
@@ -47,12 +50,29 @@ public class Employee {
         this.baseSalary = baseSalary;
     }
 
+    public EmployeeRole getEmployeeRole() {
+        return employeeRole;
+    }
+
+    public void setEmployeeRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
+    }
+
+    public PerformanceLevel getPerformanceRate() {
+        return performanceRate;
+    }
+
+    public void setPerformanceRate(PerformanceLevel performanceRate) {
+        this.performanceRate = performanceRate;
+    }
+
     @Override
     public String toString() {
         return name
                 + " | CPF: " + cpf
                 + " | Email: " + email
-                + " | Base Salary: R$" + baseSalary;
+                + " | Base Salary: R$" + baseSalary
+                + " | Role: " + employeeRole;
     }
 
 }

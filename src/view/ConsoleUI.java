@@ -1,17 +1,17 @@
 package view;
 
-import model.Developer;
-import model.Intern;
-import model.Manager;
+import model.*;
 import util.validators.IntegerInputValidator;
 
 import java.math.BigDecimal;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI {
 
    private final Scanner sc = new Scanner(System.in);
+   private List<Employee> employeers = new ArrayList<>();
 
     public void run(){
         boolean running = true;
@@ -19,6 +19,15 @@ public class ConsoleUI {
         while(running) {
             printMenu();
             int option = IntegerInputValidator.readValidInteger(sc, "\nSelect a valid option: ");
+
+            switch (option) {
+                case 1:
+                    registerEmployee();
+                    break;
+                case 2:
+                    System.out.println("teste");
+                    break;
+            }
         }
     }
 
@@ -39,12 +48,15 @@ public class ConsoleUI {
 
     private void menuOption(int option) {
         switch (option) {
-            case 1:
+            case 1: registerEmployee();
+            case 2:
+                System.out.println("nt");
         }
     }
 
     private void registerEmployee() {
-        System.out.println("-- REGISTER NEW EMPLOYEE --");
+        System.out.println("\n-- REGISTER NEW EMPLOYEE --");
+        sc.nextLine();
         System.out.print("Enter name: ");
         String employeeName = sc.nextLine();
         System.out.print("Enter CPF: ");
@@ -54,16 +66,12 @@ public class ConsoleUI {
         System.out.print("Enter base salary: ");
         double baseSalary = sc.nextDouble();
         System.out.println(
-                "Select role:\n" +
-                "[1] Manager\n" +
-                "[2] Developer\n" +
-                "[3] Intern");
+                """
+                        Select role:
+                        [1] Manager
+                        [2] Developer
+                        [3] Intern""");
         int roleOption = IntegerInputValidator.readValidInteger(sc, "\nSelect a valid option: ");
 
-        switch (roleOption) {
-            case 1: new Manager(employeeName, employeeCPF, employeeMail, new BigDecimal(baseSalary));
-            case 2: new Developer(employeeName, employeeCPF, employeeMail, new BigDecimal(baseSalary));
-            case 3 : new Intern(employeeName, employeeCPF, employeeMail, new BigDecimal(baseSalary));
-        }
     }
 }
