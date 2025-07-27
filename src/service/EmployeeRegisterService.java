@@ -8,6 +8,7 @@ import model.enums.EmployeeRole;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EmployeeRegisterService {
@@ -49,7 +50,7 @@ public class EmployeeRegisterService {
     }
 
     public List<Employee> getEmployeeList() {
-        return employeeList;
+        return Collections.unmodifiableList(employeeList);
     }
 
     public void showEmployeeList() {
