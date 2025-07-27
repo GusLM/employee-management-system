@@ -1,9 +1,8 @@
 package view;
 
-import model.*;
+import model.entities.Employee;
 import util.validators.IntegerInputValidator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

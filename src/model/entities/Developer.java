@@ -1,8 +1,8 @@
-package model;
+package model.entities;
 
 import java.math.BigDecimal;
 
-public class Developer extends Employee{
+public class Developer extends Employee {
     private Double bonus;
 
     public Developer(String name, String cpf, String email, BigDecimal baseSalary) {

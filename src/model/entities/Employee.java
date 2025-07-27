@@ -1,4 +1,7 @@
-package model;
+package model.entities;
+
+import model.enums.EmployeeRole;
+import model.enums.PerformanceLevel;
 
 import java.math.BigDecimal;
 

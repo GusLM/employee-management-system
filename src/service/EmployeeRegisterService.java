@@ -1,6 +1,10 @@
 package service;
 
-import model.*;
+import model.entities.Developer;
+import model.entities.Employee;
+import model.entities.Intern;
+import model.entities.Manager;
+import model.enums.EmployeeRole;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,14 +13,6 @@ import java.util.List;
 public class EmployeeRegisterService {
 
     private List<Employee> employeeList = new ArrayList<>();
-
-    public EmployeeRegisterService(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
-
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
 
     public void registerEmployee(
             String employeeName,
@@ -47,6 +43,31 @@ public class EmployeeRegisterService {
                 } catch (IllegalArgumentException e) {
                     System.out.println("\nError: " + e.getMessage());
                 }
+        }
+
+        System.out.println("\nEmployee registered successfully.");
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void showEmployeeList() {
+        List<Employee> employees = getEmployeeList();
+        if (employeeList.isEmpty()) {
+            System.out.println("\nNo employees have been registered yet.");
+        } else {
+            System.out.println(
+                    """
+                            
+                            ==============================
+                              EMPLOYEES LIST
+                            ==============================
+                            """);
+            for (int i=0; i<employeeList.size(); i++) {
+                Employee employee = employeeList.get(i);
+                System.out.printf("#%d %s - %s", i+1, employee.getName(), employee.getEmployeeRole());
+            }
         }
     }
 }

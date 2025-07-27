@@ -1,31 +1,19 @@
-package model;
+package model.enums;
 
-public enum PerformanceLevel {
-    BAD {
+public enum EmployeeRole {
+    MANAGER {
         @Override
         public String toString() {
             return super.toString();
         }
     },
-    REGULAR {
+    DEVELOPER {
         @Override
         public String toString() {
             return super.toString();
         }
     },
-    GOOD {
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-    },
-    GREAT {
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-    },
-    EXCELLENT {
+    INTERN {
         @Override
         public String toString() {
             return super.toString();

@@ -1,5 +1,8 @@
 package model;
 
+import model.enums.EmployeeRole;
+import model.enums.PerformanceLevel;
+
 import java.math.BigDecimal;
 
 public class EmployeesReport {
@@ -18,6 +21,7 @@ public class EmployeesReport {
             BigDecimal baseSalary,
             EmployeeRole employeeRole,
             PerformanceLevel performanceLevel
+
     ) {
         this.name = name;
         this.cpf = cpf;

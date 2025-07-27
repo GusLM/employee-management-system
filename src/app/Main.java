@@ -1,9 +1,7 @@
 package app;
 
-import service.IncomeTaxCalculator;
 import view.ConsoleUI;
 
-import java.math.BigDecimal;
 import java.util.Locale;
 
 public class Main {

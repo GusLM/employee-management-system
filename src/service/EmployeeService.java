@@ -1,8 +1,7 @@
 package service;
 
 import model.*;
-
-import java.math.BigDecimal;
+import model.entities.Employee;
 
 public class EmployeeService {
 
@@ -22,5 +21,7 @@ public class EmployeeService {
                 employee.getPerformanceRate()
         );
     }
+
+
 
 }

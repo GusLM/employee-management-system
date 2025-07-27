@@ -1,4 +1,4 @@
-package service;
+package service.tax;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
