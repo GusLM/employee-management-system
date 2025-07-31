@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeRegisterService {
 
@@ -55,7 +56,7 @@ public class EmployeeRegisterService {
 
     public void showEmployeeList() {
         List<Employee> employees = getEmployeeList();
-        if (employeeList.isEmpty()) {
+        if (employees.isEmpty()) {
             System.out.println("\nNo employees have been registered yet.");
         } else {
             System.out.println(
@@ -71,4 +72,15 @@ public class EmployeeRegisterService {
             }
         }
     }
+
+    public List<Employee> searchEmployeeByName(String employeeName) {
+        return employeeList.stream().filter(emp -> emp.getCpf().contains(employeeName))
+                .collect(Collectors.toList());
+    }
+
+    public List<Employee> searchEmployeeByCPF(String employeeCPF) {
+        return employeeList.stream().filter(emp -> emp.getCpf().contains(employeeCPF))
+                .collect(Collectors.toList());
+    }
+
 }
