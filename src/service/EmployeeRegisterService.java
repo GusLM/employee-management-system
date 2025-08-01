@@ -10,15 +10,15 @@ import service.tax.InssCalculator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EmployeeRegisterService {
 
-    private List<Employee> employeeList = new ArrayList<>();
+    private final List<Employee> employeeList = new ArrayList<>();
+
+    private final LocalDate localDate = LocalDate.now();
 
     public void registerEmployee(
             String employeeName,
@@ -120,4 +120,22 @@ public class EmployeeRegisterService {
             System.out.println("No employee found with that name or CPF.");
         }
     }
+
+    public void generateMonthlyReport(String identifier) {
+
+        Optional<Employee> cpfMatch = findEmployeeByCpf(identifier);
+
+        if (cpfMatch.isPresent()) {
+            System.out.println("Name: " + cpfMatch.get().getName());
+            System.out.println("CPF: " + cpfMatch.get().getCpf());
+            System.out.println("Role: " + cpfMatch.get().getEmployeeRole());
+            System.out.println("Net salary: ");
+            showEmployeeNetSalary(cpfMatch.get());
+            System.out.println("Report Date: " + localDate);
+        } else {
+            System.out.println("No employee found with that CPF.");
+        }
+    }
+
+
 }
