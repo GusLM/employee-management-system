@@ -5,11 +5,15 @@ import model.entities.Employee;
 import model.entities.Intern;
 import model.entities.Manager;
 import model.enums.EmployeeRole;
+import service.tax.IncomeTaxCalculator;
+import service.tax.InssCalculator;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EmployeeRegisterService {
@@ -73,14 +77,47 @@ public class EmployeeRegisterService {
         }
     }
 
-    public List<Employee> searchEmployeeByName(String employeeName) {
-        return employeeList.stream().filter(emp -> emp.getCpf().contains(employeeName))
+    public List<Employee> findEmployeeByName(String employeeName) {
+        return employeeList.stream().filter(emp -> emp.getName().equalsIgnoreCase(employeeName))
                 .collect(Collectors.toList());
     }
 
-    public List<Employee> searchEmployeeByCPF(String employeeCPF) {
-        return employeeList.stream().filter(emp -> emp.getCpf().contains(employeeCPF))
-                .collect(Collectors.toList());
+    public Optional<Employee> findEmployeeByCpf(String employeeCPF) {
+        return employeeList.stream().filter(emp -> emp.getCpf().equalsIgnoreCase(employeeCPF))
+                .findFirst();
     }
 
+    private void showEmployeeNetSalary(Employee emp) {
+        System.out.println("Name: " + emp.getName());
+        System.out.println("CPF: " + emp.getCpf());
+
+        BigDecimal baseSalary = emp.getBaseSalary();
+        BigDecimal netSalary = baseSalary
+                .subtract(InssCalculator.calculateINSS(baseSalary))
+                .subtract(IncomeTaxCalculator.calculateIRRF(baseSalary));
+
+        System.out.println("Net salary = " + netSalary.setScale(2, RoundingMode.HALF_UP));
+        System.out.println("-----------------------------");
+    }
+
+    public void employeeNetSalary(String identifier) {
+        System.out.println("=== Employee Net Salary ===");
+
+        // First try searching by CPF
+        Optional<Employee> cpfMatch = findEmployeeByCpf(identifier);
+
+        if (cpfMatch.isPresent()) {
+            showEmployeeNetSalary(cpfMatch.get());
+            return;
+        }
+
+        // Then try searching by name (may return several)
+        List<Employee> nameMatches = findEmployeeByName(identifier);
+
+        if (!nameMatches.isEmpty()) {
+            nameMatches.forEach(this::showEmployeeNetSalary);
+        } else {
+            System.out.println("No employee found with that name or CPF.");
+        }
+    }
 }

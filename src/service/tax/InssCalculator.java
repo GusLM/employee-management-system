@@ -59,7 +59,7 @@ public class InssCalculator {
      * @param baseSalary The employee's gross salary.
      * @return The total INSS contribution, rounded to 2 decimal places.
      */
-    protected static BigDecimal calculateINSS(BigDecimal baseSalary) {
+    public static BigDecimal calculateINSS(BigDecimal baseSalary) {
         // Initialize the total deduction amount to zero
         BigDecimal total = BigDecimal.ZERO;
 
