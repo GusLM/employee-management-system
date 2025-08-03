@@ -5,6 +5,7 @@ import model.entities.Employee;
 import model.entities.Intern;
 import model.entities.Manager;
 import model.enums.EmployeeRole;
+import model.enums.PerformanceLevel;
 import service.tax.IncomeTaxCalculator;
 import service.tax.InssCalculator;
 
@@ -136,6 +137,40 @@ public class EmployeeRegisterService {
             System.out.println("No employee found with that CPF.");
         }
     }
+
+    public void showEmployeeData(String identifier) {
+
+        Optional<Employee> cpfMatch = findEmployeeByCpf(identifier);
+
+        if (cpfMatch.isPresent()) {
+            System.out.println("Name: " + cpfMatch.get().getName());
+            System.out.println("CPF: " + cpfMatch.get().getCpf());
+            System.out.println("Email: " + cpfMatch.get().getEmail());
+            System.out.println("Base Salary: " + cpfMatch.get().getBaseSalary());
+            System.out.println("Role: " + cpfMatch.get().getEmployeeRole());
+            System.out.println("Performance Rate: " + cpfMatch.get().getPerformanceRate());
+            return;
+        }
+
+        List<Employee> nameMatches = findEmployeeByName(identifier);
+
+        if (!nameMatches.isEmpty()) {
+            for(Employee emp : nameMatches) {
+                System.out.println("Name: " + emp.getName());
+                System.out.println("CPF: " + emp.getCpf());
+                System.out.println("Email: " + emp.getEmail());
+                System.out.println("Base Salary: " + emp.getBaseSalary());
+                System.out.println("Role: " + emp.getEmployeeRole());
+                System.out.println("Performance Rate: " + emp.getPerformanceRate());
+                System.out.println("___________________________________");
+            }
+        } else {
+            System.out.println("No employee found with that name or CPF.");
+        }
+    }
+
+    
+
 
 
 }
