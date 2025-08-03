@@ -169,8 +169,116 @@ public class EmployeeRegisterService {
         }
     }
 
-    
+    public void editEmployee(String cpf, Scanner scanner) {
+        Optional<Employee> match = findEmployeeByCpf(cpf);
 
+        if (match.isEmpty()) {
+            System.out.println("Employee with CPF " + cpf + " not found.");
+            return;
+        }
 
+        Employee employee = match.get();
 
+        System.out.println("Editing employee: " + employee.getName());
+
+        // Name
+        System.out.print("Enter new name (or press Enter to keep '" + employee.getName() + "'): ");
+        String newName = scanner.nextLine();
+        if (!newName.isBlank()) {
+            employee.setName(newName);
+        }
+
+        // CPF
+        System.out.print("Enter new cpf (or press Enter to keep '" + employee.getCpf() + "'): ");
+        String newCpf = scanner.nextLine();
+        if (!newCpf.isBlank()) {
+            employee.setCpf(newCpf);
+        }
+
+        // Email
+        System.out.print("Enter new email (or press Enter to keep '" + employee.getEmail() + "'): ");
+        String newEmail = scanner.nextLine();
+        if (!newEmail.isBlank()) {
+            employee.setEmail(newEmail);
+        }
+
+        // Salary
+        System.out.print("Enter new base salary (or press Enter to keep '" + employee.getBaseSalary() + "'): ");
+        String salaryInput = scanner.nextLine();
+        if (!salaryInput.isBlank()) {
+            try {
+                BigDecimal newSalary = new BigDecimal(salaryInput);
+                employee.setBaseSalary(newSalary);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid salary. Keeping current value.");
+            }
+        }
+
+        // Role
+        System.out.print("Enter the number for a new role (or type the number of '" + employee.getEmployeeRole() + "'): ");
+        System.out.println(
+                """
+                        [1] - MANAGER\
+                        [2] - DEVELOPER\
+                        [3] - INTERN"""
+        );
+
+        int roleNumber = scanner.nextInt();
+        try {
+            switch (roleNumber) {
+                case 1:
+                    employee.setEmployeeRole(EmployeeRole.MANAGER);
+                    break;
+                case 2:
+                    employee.setEmployeeRole(EmployeeRole.DEVELOPER);
+                    break;
+                case 3:
+                    employee.setEmployeeRole(EmployeeRole.INTERN);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid option!");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        // Performance
+        System.out.print("Enter the number for a new Performance status (or type the number of '" + employee.getPerformanceRate() + "'): ");
+        System.out.println(
+                """
+                        [1] - BAD\
+                        [2] - REGULAR\
+                        [3] - GOOD
+                        [4] - GREAT
+                        [5] - EXCELLENT"""
+        );
+
+        int performanceOption = scanner.nextInt();
+
+        try {
+            switch (performanceOption) {
+                case 1:
+                    employee.setPerformanceRate(PerformanceLevel.BAD);
+                    break;
+                case 2:
+                    employee.setPerformanceRate(PerformanceLevel.REGULAR);
+                    break;
+                case 3:
+                    employee.setPerformanceRate(PerformanceLevel.GOOD);
+                    break;
+                case 4:
+                    employee.setPerformanceRate(PerformanceLevel.GREAT);
+                    break;
+                case 5:
+                    employee.setPerformanceRate(PerformanceLevel.EXCELLENT);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid option!");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        System.out.println("✅ Employee updated successfully.");
+    }
 }
