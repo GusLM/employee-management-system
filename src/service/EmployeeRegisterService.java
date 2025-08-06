@@ -281,4 +281,40 @@ public class EmployeeRegisterService {
 
         System.out.println("✅ Employee updated successfully.");
     }
+
+    public void removeEmployee(String cpf, Scanner scanner) {
+        Optional<Employee> cpfMatch = findEmployeeByCpf(cpf);
+
+        if (cpfMatch.isEmpty()) {
+            System.out.println("Employee with CPF " + cpf + " not found.");
+            return;
+        }
+
+        Employee employee = cpfMatch.get();
+
+        System.out.println("Name: " + cpfMatch.get().getName());
+        System.out.println("CPF: " + cpfMatch.get().getCpf());
+        System.out.println("Email: " + cpfMatch.get().getEmail());
+        System.out.println("Base Salary: " + cpfMatch.get().getBaseSalary());
+        System.out.println("Role: " + cpfMatch.get().getEmployeeRole());
+        System.out.println("Performance Rate: " + cpfMatch.get().getPerformanceRate());
+        System.out.println("----------------------------------");
+
+        System.out.println();
+        System.out.println("Are you sure you want to remove the employee? [Type 's' for remove or 'n' to exit].");
+
+        String answer;
+
+        // It is necessary to adjust this logic
+        do {
+            answer = scanner.next();
+        } while (!answer.equalsIgnoreCase("s") || !answer.equalsIgnoreCase("n"));
+
+        if (answer.equalsIgnoreCase("s")) {
+            employeeList.remove(employee);
+            System.out.println("✅ Employee successfully removed.");
+        } else {
+            System.out.println("\uD83C\uDFC3 Leaving the operation!");
+        }
+    }
 }
