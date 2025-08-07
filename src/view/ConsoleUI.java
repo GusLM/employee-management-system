@@ -1,16 +1,14 @@
 package view;
 
-import model.entities.Employee;
+import controller.EmployeeController;
 import util.validators.IntegerInputValidator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI {
 
    private final Scanner sc = new Scanner(System.in);
-   private List<Employee> employeers = new ArrayList<>();
+   private EmployeeController employeeController;
 
     public void run(){
         boolean running = true;

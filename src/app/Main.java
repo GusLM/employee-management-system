@@ -1,12 +1,7 @@
 package app;
 
-import model.entities.Developer;
-import model.entities.Employee;
-import model.entities.Intern;
-import model.entities.Manager;
-import service.EmployeeRegisterService;
+import service.EmployeeService;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
@@ -17,7 +12,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
 //        Manual testing
-        EmployeeRegisterService registerService = new EmployeeRegisterService();
+        EmployeeService registerService = new EmployeeService();
 
         registerService.registerEmployee("Andre", "86239085545", "mail@mail.com", 3000.00, 2);
         registerService.registerEmployee("Jonas", "88622286645", "mail@email.com", 800.00, 3);
