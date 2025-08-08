@@ -17,9 +17,13 @@ import java.util.stream.Collectors;
 
 public class EmployeeService {
 
-    private final List<Employee> employeeList = new ArrayList<>();
+    private List<Employee> employeeList = new ArrayList<>();
 
     private final LocalDate localDate = LocalDate.now();
+
+    public EmployeeService(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
 
     public void registerEmployee(
             String employeeName,
@@ -74,7 +78,9 @@ public class EmployeeService {
             for (int i=0; i<employeeList.size(); i++) {
                 Employee employee = employeeList.get(i);
                 System.out.printf("#%d %s - %s", i+1, employee.getName(), employee.getEmployeeRole());
+                System.out.println();
             }
+            System.out.println();
         }
     }
 
@@ -182,6 +188,7 @@ public class EmployeeService {
         System.out.println("Editing employee: " + employee.getName());
 
         // Name
+        scanner.nextLine();
         System.out.print("Enter new name (or press Enter to keep '" + employee.getName() + "'): ");
         String newName = scanner.nextLine();
         if (!newName.isBlank()) {
@@ -189,6 +196,7 @@ public class EmployeeService {
         }
 
         // CPF
+        scanner.next();
         System.out.print("Enter new cpf (or press Enter to keep '" + employee.getCpf() + "'): ");
         String newCpf = scanner.nextLine();
         if (!newCpf.isBlank()) {
@@ -196,6 +204,7 @@ public class EmployeeService {
         }
 
         // Email
+        scanner.next();
         System.out.print("Enter new email (or press Enter to keep '" + employee.getEmail() + "'): ");
         String newEmail = scanner.nextLine();
         if (!newEmail.isBlank()) {
@@ -203,6 +212,7 @@ public class EmployeeService {
         }
 
         // Salary
+        scanner.next();
         System.out.print("Enter new base salary (or press Enter to keep '" + employee.getBaseSalary() + "'): ");
         String salaryInput = scanner.nextLine();
         if (!salaryInput.isBlank()) {
@@ -216,11 +226,11 @@ public class EmployeeService {
 
         // Role
         System.out.print("Enter the number for a new role (or type the number of '" + employee.getEmployeeRole() + "'): ");
+        System.out.println();
         System.out.println(
-                """
-                        [1] - MANAGER\
-                        [2] - DEVELOPER\
-                        [3] - INTERN"""
+                "[1] - MANAGER\n"
+                + "[2] - DEVELOPER\n"
+                + "[3] - INTERN"
         );
 
         int roleNumber = scanner.nextInt();
@@ -244,13 +254,13 @@ public class EmployeeService {
 
         // Performance
         System.out.print("Enter the number for a new Performance status (or type the number of '" + employee.getPerformanceRate() + "'): ");
+        System.out.println();
         System.out.println(
-                """
-                        [1] - BAD\
-                        [2] - REGULAR\
-                        [3] - GOOD
-                        [4] - GREAT
-                        [5] - EXCELLENT"""
+                "[1] - BAD\n"
+                + "[2] - REGULAR\n"
+                + "[3] - GOOD\n"
+                + "[4] - GREAT\n"
+                + "[5] - EXCELLENT"
         );
 
         int performanceOption = scanner.nextInt();
@@ -292,6 +302,7 @@ public class EmployeeService {
 
         Employee employee = cpfMatch.get();
 
+        System.out.println();
         System.out.println("Name: " + cpfMatch.get().getName());
         System.out.println("CPF: " + cpfMatch.get().getCpf());
         System.out.println("Email: " + cpfMatch.get().getEmail());
